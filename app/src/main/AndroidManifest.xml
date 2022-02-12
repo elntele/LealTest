@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LealTest">
         <activity
-            android:name=".cadastro.Cadastro"
+            android:name=".cadastro.CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".login.Login"
+            android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

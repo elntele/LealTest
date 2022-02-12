@@ -4,6 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.Login">
+    tools:context=".login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/titulo" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="sairTelaLogin"
+            app:srcCompat="@drawable/ic_exit_to_app_black_24dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/email_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="55dp"
+        android:background="@drawable/backshape"
+        android:ems="10"
+        android:hint="@string/gigEmaillog"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/senha_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="55dp"
+        android:background="@drawable/backshape"
+        android:ems="10"
+        android:hint="@string/gigSenLog"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_login" />
+
+    <Button
+        android:id="@+id/botao_entrar_login"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/bt_fundo_verde"
+        android:text="@string/botEntr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/senha_login" />
+
+    <Button
+        android:id="@+id/botão_cadastro_login"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/bt_fundo_verde"
+        android:text="@string/botCadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botao_entrar_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
