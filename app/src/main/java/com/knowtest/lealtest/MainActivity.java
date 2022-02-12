@@ -17,6 +17,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.knowtest.lealtest.login.LoginActivity;
 import com.knowtest.lealtest.viewMoldel.CredentialViewModel;
+import com.knowtest.lealtest.viewMoldel.DataBaseViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = DataBaseViewModel.Companion.getFirebaseFirestore();
 
-        db.collection("TREINO")
+        db.collection("EXERCICIO")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
