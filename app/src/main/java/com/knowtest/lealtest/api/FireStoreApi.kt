@@ -1,9 +1,9 @@
-package com.knowtest.lealtest.viewMoldel
+package com.knowtest.lealtest.api
 
 
 import com.google.firebase.firestore.FirebaseFirestore
 
-class DataBaseViewModel {
+class FireStoreApi {
 
     companion object {
 
@@ -17,5 +17,6 @@ class DataBaseViewModel {
             return db
         }
     }
+
 
 }

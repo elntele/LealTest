@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.cadastro.CadastroActivity;
 import com.knowtest.lealtest.model.User;
-import com.knowtest.lealtest.viewMoldel.CredentialViewModel;
+import com.knowtest.lealtest.api.CredentialApi;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logador(){
-        auth = CredentialViewModel.Companion.getFirebaseAuth();
+        auth = CredentialApi.Companion.getFirebaseAuth();
         auth.signInWithEmailAndPassword(user.getEmail(),user.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

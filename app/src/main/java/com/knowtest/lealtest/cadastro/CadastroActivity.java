@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.model.User;
-import com.knowtest.lealtest.viewMoldel.CredentialViewModel;
+import com.knowtest.lealtest.api.CredentialApi;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -82,7 +82,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     public void cadastrarUsuario(User user){
-        autentication= CredentialViewModel.Companion.getFirebaseAuth();
+        autentication= CredentialApi.Companion.getFirebaseAuth();
         autentication.createUserWithEmailAndPassword(
                 user.getEmail(), user.getSenha()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

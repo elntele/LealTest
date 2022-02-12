@@ -1,9 +1,9 @@
-package com.knowtest.lealtest.viewMoldel
+package com.knowtest.lealtest.api
 
 import com.google.firebase.auth.FirebaseAuth
 
 // kotlin
-class CredentialViewModel() {
+class CredentialApi() {
     companion object {
         private var firebaseAuth: FirebaseAuth? = null
         //padrão sigleton
