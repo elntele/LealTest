@@ -17,7 +17,6 @@ import com.knowtest.lealtest.api.FireStoreApi;
 import com.knowtest.lealtest.dao.DataBaseDao;
 import com.knowtest.lealtest.interfaces.LealCalBack;
 import com.knowtest.lealteste.Activity.model.Exercicio;
-import com.knowtest.lealteste.Activity.model.Treino;
 
 import java.net.MalformedURLException;
 import java.net.URL;
