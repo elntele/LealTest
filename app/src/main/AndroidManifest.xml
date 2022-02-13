@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LealTest">
         <activity
+            android:name=".wait.WaitActivity"
+            android:exported="false" />
+        <activity
             android:name=".cadastro.CadastroActivity"
             android:exported="false" />
         <activity

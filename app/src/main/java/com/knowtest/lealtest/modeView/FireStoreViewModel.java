@@ -2,9 +2,11 @@ package com.knowtest.lealtest.modeView;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.room.Room;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,31 +14,64 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.knowtest.lealtest.api.FireStoreApi;
+import com.knowtest.lealtest.dao.DataBaseDao;
 import com.knowtest.lealtest.interfaces.LealCalBack;
+import com.knowtest.lealteste.Activity.model.Exercicio;
 import com.knowtest.lealteste.Activity.model.Treino;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FireStoreViewModel {
-
-    public FireStoreViewModel() {
+    private List<Exercicio> exercicios = new ArrayList<>();
+    private DataBaseDao db;
+    public FireStoreViewModel(Context context) {
+        db = Room.databaseBuilder(context, DataBaseDao.class, "MeuBD").build();
     }
 
-    public List<Treino> getTreinos(){
-        List <Treino> l = new ArrayList<>();
+    public DataBaseDao getDb() {
+        return db;
+    }
+
+    public  void getExerciciosInBack(){
+
         readData(new LealCalBack() {
             @Override
-            public void onCallback(List<Map<String, Object>> eventList) {
-                Treino t = new Treino();
+            public void onCallback(List<Map<String, Object>> mapList) {
+                Exercicio e = new Exercicio();
+                for (Map<String, Object> m:mapList ){
+                    e.setId(m.get("id").toString());
+                    e.setObservacoes(m.get("observacoes").toString());
+                    e.setNome( (Long)m.get("easyLong"));
+                    try {
+                        URL url = new URL(m.get("imagem").toString());
+                        e.setImagem(url);
+                    } catch (MalformedURLException malformedURLException) {
+                        malformedURLException.printStackTrace();
+                    }
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            db.IexercicioDao().Insert(e);
+
+                        }
+                    }).start();
+                    exercicios.add(e);
+
+                }
+
                // t.setId(eventList.get("id"));
-                Log.d("TAG", eventList.toString());
+                Log.d("TAG", mapList.toString());
 
             }
         });
-        return null;
+
     }
 
 
@@ -52,7 +87,9 @@ public class FireStoreViewModel {
 
                             for(QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> m = new HashMap<String, Object>();
-                                //e.setId(doc.getId());
+                                m.put("id",document.getId());
+                                m.put("easyLong", document.getLong("nome"));
+                                m.putAll(document.getData());
                                 eventList.add(m);
                             }
                             lealCallback.onCallback(eventList);
@@ -64,5 +101,8 @@ public class FireStoreViewModel {
                 });
     }
 
+    public List<Exercicio> getExercicios() {
+        return exercicios;
 
+    }
 }
