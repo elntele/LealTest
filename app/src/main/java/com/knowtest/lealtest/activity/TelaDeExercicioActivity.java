@@ -14,9 +14,8 @@ import android.widget.SearchView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.knowtest.lealtest.R;
-import com.knowtest.lealtest.adapter.TelaIncialAdapter;
+import com.knowtest.lealtest.adapter.TelaDeExercicioAdapter;
 import com.knowtest.lealtest.helper.RecyclerItemClickListener;
-import com.knowtest.lealtest.model.Treino;
 import com.knowtest.lealtest.singletonInstances.CredentialApi;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 
@@ -24,11 +23,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaInicialActivity extends AppCompatActivity {
+public class TelaDeExercicioActivity extends AppCompatActivity {
 
-    private RecyclerView recycleViewTelaInicial;
-    private TelaIncialAdapter adapter;
-    private List<Treino> treinos = new ArrayList();
+    private RecyclerView recycleViewTelaExercicios;
+    private TelaDeExercicioAdapter adapter;
+    private List<Exercicio> exercicios = new ArrayList();
     private SearchView searchView;
     private FirebaseAuth auth;
 
@@ -38,35 +37,33 @@ public class TelaInicialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //Remove title bar
         this.getSupportActionBar().hide();
-        ArrayList<Treino> data;
-        data = getIntent().getExtras().getParcelableArrayList("array");
-        treinos =data;
-        setContentView(R.layout.activity_tela_inicial);
-        searchView = findViewById(R.id.search_tela_inicial);
-        recycleViewTelaInicial = findViewById(R.id.recicler_lista_file);
+        ArrayList<Exercicio> data;
+        data = getIntent().getExtras().getParcelableArrayList("exercicios");
+        exercicios = data;
+        setContentView(R.layout.activity_tela_de_exercicio);
+        searchView = findViewById(R.id.search_tela_exerc);
+        recycleViewTelaExercicios = findViewById(R.id.recicler_lista_file_exerc);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        final TelaIncialAdapter adapter = new TelaIncialAdapter(treinos, getApplicationContext());
-        recycleViewTelaInicial.setLayoutManager(layoutManager);
-        recycleViewTelaInicial.setAdapter(adapter);
-        this.adapter=adapter;
+        final TelaDeExercicioAdapter adapter = new TelaDeExercicioAdapter(exercicios, getApplicationContext());
+        recycleViewTelaExercicios.setLayoutManager(layoutManager);
+        recycleViewTelaExercicios.setAdapter(adapter);
+        this.adapter = adapter;
 
-        recycleViewTelaInicial.addOnItemTouchListener(
-                new RecyclerItemClickListener(getApplicationContext(), recycleViewTelaInicial, new RecyclerItemClickListener.OnItemClickListener() {
+        recycleViewTelaExercicios.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), recycleViewTelaExercicios, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getApplicationContext(), TelaDeExercicioActivity.class);
-                        intent.putParcelableArrayListExtra("exercicios", (ArrayList<Exercicio>) treinos.get(position).exercicios);
+                        Intent intent = new Intent(getApplicationContext(), TelaDeApresentacaoActivity.class);
+                        intent.putExtra("exercicio", (Serializable) exercicios.get(position));
                         startActivity(intent);
-
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        Intent intent = new Intent(getApplicationContext(), TelaDeExercicioActivity.class);
-                        intent.putParcelableArrayListExtra("exercicios", (ArrayList<Exercicio>) treinos.get(position).exercicios);
+
+                        Intent intent = new Intent(getApplicationContext(), TelaDeApresentacaoActivity.class);
+                        intent.putExtra("exercicio", (Serializable) exercicios.get(position));
                         startActivity(intent);
-
-
                     }
 
                     @Override
@@ -114,7 +111,6 @@ public class TelaInicialActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
 
 
     public void logOutTelaInicial(View v) {

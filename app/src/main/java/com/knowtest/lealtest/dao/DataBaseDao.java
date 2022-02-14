@@ -3,8 +3,8 @@ package com.knowtest.lealtest.dao;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import com.knowtest.lealtest.interfaces.IexercicioDao;
-import com.knowtest.lealtest.interfaces.ItreinoDao;
+import com.knowtest.lealtest.interfacesDao.IexercicioDao;
+import com.knowtest.lealtest.interfacesDao.ItreinoDao;
 import com.knowtest.lealtest.model.Treino;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 

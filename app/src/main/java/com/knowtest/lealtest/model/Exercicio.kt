@@ -6,6 +6,7 @@ import android.os.Parcelable
 import androidx.room.*
 import com.google.gson.annotations.Expose
 import com.knowtest.lealtest.helper.UrlConverter
+import java.net.MalformedURLException
 import java.net.URL
 
 @Entity
@@ -28,12 +29,21 @@ class Exercicio (): Parcelable, java.io.Serializable {
         id = parcel.readString().toString()
         nome = parcel.readValue(Long::class.java.classLoader) as? Long
         observacoes = parcel.readString()
+       var im =parcel.readString().toString()
+        try {
+            val url = URL(im)
+            imagem = url
+        } catch (malformedURLException: MalformedURLException) {
+            malformedURLException.printStackTrace()
+        }
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeValue(nome)
         parcel.writeString(observacoes)
+        parcel.writeString(imagem.toString())
+
     }
 
     override fun describeContents(): Int {
@@ -49,4 +59,6 @@ class Exercicio (): Parcelable, java.io.Serializable {
             return arrayOfNulls(size)
         }
     }
+
+
 }

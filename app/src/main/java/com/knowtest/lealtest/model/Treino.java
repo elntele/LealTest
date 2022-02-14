@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -37,6 +38,8 @@ public class Treino implements Parcelable, Serializable {
     @ColumnInfo(name = "lis_exer")
     @TypeConverters(ListExerciciosCoverter.class)
     public ArrayList<Exercicio> exercicios = new ArrayList<>();
+    @Ignore
+    public ArrayList<DocumentReference> strinExe = new ArrayList<>();
 
     public Treino() {
     }
@@ -101,19 +104,19 @@ public class Treino implements Parcelable, Serializable {
         return exercicios;
     }
 
+    public ArrayList<DocumentReference> getStrinExe() {
+        return strinExe;
+    }
 
-
-  /*  public List<DocumentReference> getExercicioStr() {
-        return exercicioStr;
-    }*/
+    public void setStrinExe(ArrayList<DocumentReference> strinExe) {
+        this.strinExe = strinExe;
+    }
 
     public void setExercicios(ArrayList<Exercicio> exercicios) {
         this.exercicios = exercicios;
     }
 
- /*   public void setExercicioStr(ArrayList<DocumentReference> exercicioStr) {
-        this.exercicioStr = exercicioStr;
-    }*/
+
 
     @Override
     public int describeContents() {
@@ -135,6 +138,7 @@ public class Treino implements Parcelable, Serializable {
     }
 
 
+
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -149,4 +153,5 @@ public class Treino implements Parcelable, Serializable {
 
 
     }
+
 }

@@ -1,4 +1,4 @@
-package com.knowtest.lealtest.interfaces;
+package com.knowtest.lealtest.interfacesDao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

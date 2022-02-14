@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.model.User;
-import com.knowtest.lealtest.singletonStances.CredentialApi;
+import com.knowtest.lealtest.singletonInstances.CredentialApi;
 
 public class CadastroActivity extends AppCompatActivity {
 

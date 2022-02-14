@@ -1,4 +1,4 @@
-package com.knowtest.lealtest.singletonStances
+package com.knowtest.lealtest.singletonInstances
 
 
 import com.google.firebase.firestore.FirebaseFirestore

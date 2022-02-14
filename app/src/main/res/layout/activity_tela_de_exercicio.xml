@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.TelaInicialActivity">
+    tools:context=".activity.TelaDeExercicioActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/linearLayout4_exec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,14 +16,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView_exec"
             android:layout_width="380dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/titulo" />
 
         <ImageView
-            android:id="@+id/exit_button_tela_principal"
+            android:id="@+id/exit_button_tela_exerc"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -34,42 +34,43 @@
     </LinearLayout>
 
     <SearchView
-        android:id="@+id/search_tela_inicial"
+        android:id="@+id/search_tela_exerc"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout4">
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4_exec">
 
     </SearchView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/tituloTrei"
+        android:text="@string/tituloExerc"
         android:textAlignment="center"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_tela_inicial" />
+        app:layout_constraintTop_toBottomOf="@+id/search_tela_exerc" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recicler_lista_file"
+        android:id="@+id/recicler_lista_file_exerc"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5_exerc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
+        android:id="@+id/linearLayout5_exerc"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:background="#2B2B2B"
@@ -82,14 +83,14 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#CACACACA">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/imageButton_exerc"
                 android:layout_width="410dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#CACACA"
                 android:onClick="logOutTelaInicial"

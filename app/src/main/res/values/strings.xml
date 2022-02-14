@@ -9,4 +9,10 @@
     <string name="botLimpar">Limpar</string>
     <string name="botCadastrar">Cadastrar</string>
     <string name="botCadastro">Cadastro</string>
+    <string name="continuarExerc">Click para abrir os exercicios</string>
+    <string name="contnuarLendo">Click para abrir os exercicios</string>
+    <string name="verExerc">Click para ver o exercício</string>
+    <string name="tituloTrei">Treinamentos</string>
+    <string name="tituloExerc">Exercícios</string>
+    <string name="espera">Aguarde um momento, o app está carregando a lista de treinos.</string>
 </resources>

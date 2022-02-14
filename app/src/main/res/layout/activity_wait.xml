@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="94dp"
-        android:text="Aguarde um momento, o app está carregando a lista de treinos."
+        android:text="@string/espera"
         android:textAlignment="center"
         android:textSize="21sp"
         android:textStyle="bold"

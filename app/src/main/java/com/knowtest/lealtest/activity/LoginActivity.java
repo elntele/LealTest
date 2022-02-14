@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.model.User;
-import com.knowtest.lealtest.singletonStances.CredentialApi;
+import com.knowtest.lealtest.singletonInstances.CredentialApi;
 
 public class LoginActivity extends AppCompatActivity {
 

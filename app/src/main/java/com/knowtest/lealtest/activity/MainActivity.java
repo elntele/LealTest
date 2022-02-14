@@ -17,8 +17,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.model.Treino;
-import com.knowtest.lealtest.singletonStances.CredentialApi;
-import com.knowtest.lealtest.singletonStances.FireStoreApi;
+import com.knowtest.lealtest.singletonInstances.CredentialApi;
+import com.knowtest.lealtest.singletonInstances.FireStoreApi;
 import com.knowtest.lealtest.viewModel.FireStoreViewModel;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 
