@@ -1,5 +1,6 @@
 package com.knowtest.lealtest.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -11,9 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/*import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;*/
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.knowtest.lealtest.R;
+import com.knowtest.lealtest.activity.MainActivity;
 import com.knowtest.lealtest.model.Treino;
+import com.knowtest.lealtest.singletonInstances.FireBaseStarangeApi;
 import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +33,14 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
     private List<Treino> treinos;
     private List<Treino> treinosCopy = new ArrayList<>();
     private Context context;
+    private Activity activity;
 
 
-    public TelaIncialAdapter(List<Treino> treinos, Context context) {
+    public TelaIncialAdapter(List<Treino> treinos, Context context, Activity activity) {
         this.treinos = treinos;
         this.treinosCopy.addAll(treinos);
         this.context = context;
+        this.activity = activity;
 
     }
 
@@ -47,9 +59,8 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
         holder.overView.setText(mess);
         holder.name.setText(treinos.get(position).getDescricao().toString());
 
-        Picasso.get().load(treinos.get(position).exercicios.get(0).getImagem().toString()).
+        Picasso.get().load(treinos.get(position).getExercicios().get(1).getImagem().toString()).
                 placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
-
 
     }
 

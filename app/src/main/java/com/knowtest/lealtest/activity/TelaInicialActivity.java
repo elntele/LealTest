@@ -45,7 +45,7 @@ public class TelaInicialActivity extends AppCompatActivity {
         searchView = findViewById(R.id.search_tela_inicial);
         recycleViewTelaInicial = findViewById(R.id.recicler_lista_file);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        final TelaIncialAdapter adapter = new TelaIncialAdapter(treinos, getApplicationContext());
+        final TelaIncialAdapter adapter = new TelaIncialAdapter(treinos, getApplicationContext(), this);
         recycleViewTelaInicial.setLayoutManager(layoutManager);
         recycleViewTelaInicial.setAdapter(adapter);
         this.adapter=adapter;
