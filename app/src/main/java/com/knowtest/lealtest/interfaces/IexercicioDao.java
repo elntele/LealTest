@@ -16,9 +16,9 @@ public interface IexercicioDao {
     @Query("Select * from exercicio where id like :id limit 1")
     Exercicio findByid(String id);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void Insert (Exercicio exercicio);
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void Insert (List<Exercicio> exercicios);
+    void Insert(Exercicio exercicio);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void InsertAll(List<Exercicio> exercicios);
     @Update
     void update(Exercicio exercicio);
     @Delete

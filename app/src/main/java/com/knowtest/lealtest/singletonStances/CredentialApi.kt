@@ -1,4 +1,4 @@
-package com.knowtest.lealtest.api
+package com.knowtest.lealtest.singletonStances
 
 import com.google.firebase.auth.FirebaseAuth
 

@@ -1,4 +1,4 @@
-package com.knowtest.lealtest.wait;
+package com.knowtest.lealtest.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,11 +18,11 @@ public class WaitActivity extends AppCompatActivity {
         this.getSupportActionBar().hide();
         Timer timer = new Timer();
         MyTimerTask myTask = new MyTimerTask();
-        timer.schedule(myTask, 1000, 1000);
+        timer.schedule(myTask, 3000, 3000);
     }
 
 
-    class MyTimerTask extends TimerTask {
+    public class MyTimerTask extends TimerTask {
         public void run() {
             finish();
 

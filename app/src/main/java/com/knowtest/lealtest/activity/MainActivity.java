@@ -1,4 +1,4 @@
-package com.knowtest.lealtest;
+package com.knowtest.lealtest.activity;
 
 import static android.content.ContentValues.TAG;
 
@@ -15,11 +15,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.knowtest.lealtest.login.LoginActivity;
-import com.knowtest.lealtest.api.CredentialApi;
-import com.knowtest.lealtest.api.FireStoreApi;
-import com.knowtest.lealtest.modeView.FireStoreViewModel;
-import com.knowtest.lealtest.wait.WaitActivity;
+import com.knowtest.lealtest.R;
+import com.knowtest.lealtest.model.Treino;
+import com.knowtest.lealtest.singletonStances.CredentialApi;
+import com.knowtest.lealtest.singletonStances.FireStoreApi;
+import com.knowtest.lealtest.viewModel.FireStoreViewModel;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 
 import java.util.ArrayList;
@@ -28,20 +28,21 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private FireStoreViewModel f;
     private List<Exercicio> exercicios = new ArrayList<>();
-
+    private List<Treino> treinos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        f = new FireStoreViewModel(getApplicationContext());
-        consultabanco();
-        new Thread(new Runnable() {
+        f =  f.fireStoreViewModel(getApplicationContext());
+        f.getExerciciosInBack();
+       // consultabanco();
+       /* new Thread(new Runnable() {
             @Override
             public void run() {
                 f.getExerciciosInBack();
             }
         }).start();
-
+*/
         consultabanco();
     }
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 exercicios = f.getDb().IexercicioDao().getAll();
-
+                treinos =f.getDb().ItreinoDao().getAll();
             }
         }).start();
     }
@@ -77,17 +78,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        consultabanco();
+       // consultabanco();
+        //f = new FireStoreViewModel(getApplicationContext());
+     //   consultabanco();
+
         routing();
     }
 
     public void routing() {
+        List <Treino> ts= f.getTreinoout();
         FirebaseAuth firebaseAuth = CredentialApi.Companion.getFirebaseAuth();
-        if (firebaseAuth.getCurrentUser() == null) {
+        if ((!(firebaseAuth.getCurrentUser() == null))) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
-        }else if (exercicios.size()==0){
+        }else if (!(ts.size()>0)){
             Intent intent = new Intent(getApplicationContext(), WaitActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), TelaInicialActivity.class);
+            intent.putParcelableArrayListExtra("array", (ArrayList<Treino>) ts);
             startActivity(intent);
         }
     }

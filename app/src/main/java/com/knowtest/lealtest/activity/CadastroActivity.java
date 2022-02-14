@@ -1,4 +1,4 @@
-package com.knowtest.lealtest.cadastro;
+package com.knowtest.lealtest.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.model.User;
-import com.knowtest.lealtest.api.CredentialApi;
+import com.knowtest.lealtest.singletonStances.CredentialApi;
 
 public class CadastroActivity extends AppCompatActivity {
 

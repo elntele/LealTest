@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".wait.WaitActivity">
+    tools:context=".activity.WaitActivity">
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="94dp"
-        android:text="Aguarde um momento, o app está carregando a lista de filmes."
+        android:text="Aguarde um momento, o app está carregando a lista de treinos."
         android:textAlignment="center"
         android:textSize="21sp"
         android:textStyle="bold"

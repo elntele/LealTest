@@ -1,4 +1,4 @@
-package com.knowtest.lealtest.login;
+package com.knowtest.lealtest.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -19,9 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.knowtest.lealtest.R;
-import com.knowtest.lealtest.cadastro.CadastroActivity;
 import com.knowtest.lealtest.model.User;
-import com.knowtest.lealtest.api.CredentialApi;
+import com.knowtest.lealtest.singletonStances.CredentialApi;
 
 public class LoginActivity extends AppCompatActivity {
 

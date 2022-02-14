@@ -4,6 +4,7 @@ import androidx.room.TypeConverter;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 
 import java.lang.reflect.Type;
@@ -15,13 +16,15 @@ public class ListExerciciosCoverter {
     public static ArrayList<Exercicio> fromString(String value) {
         Type listType = new TypeToken<ArrayList<Exercicio>>() {
         }.getType();
-        ArrayList<Exercicio> e = new Gson().fromJson(value, listType);
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        ArrayList<Exercicio> e = gson.fromJson(value, listType);
         return e;
     }
 
     @TypeConverter
     public static String fromArrayList(ArrayList<Exercicio> list) {
-        Gson gson = new Gson();
+        // Gson gson = new Gson();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(list);
         return json;
     }
