@@ -15,6 +15,7 @@ import android.widget.SearchView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.adapter.TelaIncialAdapter;
+import com.knowtest.lealtest.helper.ClearCache;
 import com.knowtest.lealtest.helper.RecyclerItemClickListener;
 import com.knowtest.lealtest.model.Treino;
 import com.knowtest.lealtest.singletonInstances.CredentialApi;
@@ -127,6 +128,8 @@ public class TelaInicialActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 FirebaseAuth auth = CredentialApi.Companion.getFirebaseAuth();
                 auth.signOut();
+                ClearCache.deleteCache(getApplicationContext());
+                finish();
                 finish();
                 finishAffinity();
                 System.exit(0);

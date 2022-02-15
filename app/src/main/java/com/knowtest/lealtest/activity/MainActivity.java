@@ -29,20 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private FireStoreViewModel f;
     private List<Exercicio> exercicios = new ArrayList<>();
     private List<Treino> treinos = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        f =  f.fireStoreViewModel(getApplicationContext());
+        f = f.fireStoreViewModel(getApplicationContext());
         f.getExerciciosInBack();
-       // consultabanco();
-       /* new Thread(new Runnable() {
-            @Override
-            public void run() {
-                f.getExerciciosInBack();
-            }
-        }).start();
-*/
         consultabanco();
     }
 
@@ -51,50 +44,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 exercicios = f.getDb().IexercicioDao().getAll();
-                treinos =f.getDb().ItreinoDao().getAll();
+                treinos = f.getDb().ItreinoDao().getAll();
             }
         }).start();
     }
 
-    private void getExercicios() {
-        FirebaseFirestore db = FireStoreApi.Companion.getFirebaseFirestore();
-        db.collection("EXERCICIO")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-    }
-
-
     @Override
     public void onStart() {
         super.onStart();
-       // consultabanco();
-        //f = new FireStoreViewModel(getApplicationContext());
-     //   consultabanco();
-
         routing();
     }
 
     public void routing() {
-        List <Treino> ts= f.getTreinoout();
+        List<Treino> ts = f.getTreinoout();
         FirebaseAuth firebaseAuth = CredentialApi.Companion.getFirebaseAuth();
-        if ((!(firebaseAuth.getCurrentUser() == null))) {
+        if (((firebaseAuth.getCurrentUser() == null))) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
-        }else if (!(ts.size()>0)){
+        } else if (!(ts.size() > 0)) {
             Intent intent = new Intent(getApplicationContext(), WaitActivity.class);
             startActivity(intent);
-        }else{
+        } else {
             Intent intent = new Intent(getApplicationContext(), TelaInicialActivity.class);
             intent.putParcelableArrayListExtra("array", (ArrayList<Treino>) ts);
             startActivity(intent);

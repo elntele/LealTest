@@ -15,6 +15,7 @@ import android.widget.SearchView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.adapter.TelaDeExercicioAdapter;
+import com.knowtest.lealtest.helper.ClearCache;
 import com.knowtest.lealtest.helper.RecyclerItemClickListener;
 import com.knowtest.lealtest.singletonInstances.CredentialApi;
 import com.knowtest.lealteste.Activity.model.Exercicio;
@@ -75,6 +76,8 @@ public class TelaDeExercicioActivity extends AppCompatActivity {
         );
 
 
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -90,6 +93,13 @@ public class TelaDeExercicioActivity extends AppCompatActivity {
         });
 
     }
+
+
+    public void backButtonTelaExc(View view) {
+        finish();
+
+    }
+
 
     public void sairTelaInicial(View v) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -123,6 +133,7 @@ public class TelaDeExercicioActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 FirebaseAuth auth = CredentialApi.Companion.getFirebaseAuth();
                 auth.signOut();
+                ClearCache.deleteCache(getApplicationContext());
                 finish();
                 finishAffinity();
                 System.exit(0);

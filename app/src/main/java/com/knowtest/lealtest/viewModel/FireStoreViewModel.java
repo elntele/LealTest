@@ -166,7 +166,7 @@ public class FireStoreViewModel {
 
     }
 
-     @RequiresApi(api = Build.VERSION_CODES.N)
+
     public List<Treino> getTreinoout() {
         List<Treino> localList = new ArrayList<>();
         List<Treino> r = new ArrayList<>();
