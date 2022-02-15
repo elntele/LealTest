@@ -21,15 +21,13 @@ import java.util.List;
 public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicioAdapter.TelaDeExercicioAdapterMyViewHolder> {
 
     private List<Exercicio> exercicios;
-    private List <Exercicio> exerciciosCopy = new ArrayList<>();
+    private List<Exercicio> exerciciosCopy = new ArrayList<>();
     Context context;
-
-
 
     public TelaDeExercicioAdapter(List<Exercicio> exercicios, Context context) {
         this.exercicios = exercicios;
         this.exerciciosCopy.addAll(exercicios);
-        this.context=context;
+        this.context = context;
 
     }
 
@@ -46,22 +44,21 @@ public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicio
     public void onBindViewHolder(@NonNull TelaDeExercicioAdapter.TelaDeExercicioAdapterMyViewHolder holder, int position) {
 
 
-        String textoCompleto= exercicios.get(position).getObservacoes();
-        String substring="";
+        String textoCompleto = exercicios.get(position).getObservacoes();
+        String substring = "";
         try {
-            substring=textoCompleto.substring(0,50);
-        }catch (Exception e){
-            substring=textoCompleto.substring(0,textoCompleto.length());
+            substring = textoCompleto.substring(0, 50);
+        } catch (Exception e) {
+            substring = textoCompleto.substring(0, textoCompleto.length());
         }
 
-        String Arrstr []= exercicios.get(position).getObservacoes().split(" ");
-        String firstWord=Arrstr[0];
+        String Arrstr[] = exercicios.get(position).getObservacoes().split(" ");
+        String firstWord = Arrstr[0];
         String mess = context.getString(R.string.continuarExerc);
-        holder.overView.setText(substring+"... "+ context.getText(R.string.contnuarLendo));
+        holder.overView.setText(substring + "... " + context.getText(R.string.contnuarLendo));
         holder.name.setText(firstWord);
         Picasso.get().load(exercicios.get(position).getImagem().toString()).
                 placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
-
 
     }
 
@@ -73,12 +70,12 @@ public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicio
 
     public void filter(String text) {
         exercicios.clear();
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             exercicios.addAll(exerciciosCopy);
-        } else{
+        } else {
             text = text.toLowerCase();
-            for(Exercicio e: exerciciosCopy){
-                if(e.getObservacoes().toLowerCase().contains(text) ){
+            for (Exercicio e : exerciciosCopy) {
+                if (e.getObservacoes().toLowerCase().contains(text)) {
                     exercicios.add(e);
                 }
             }
@@ -86,9 +83,7 @@ public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicio
         notifyDataSetChanged();
     }
 
-
-
-    public class TelaDeExercicioAdapterMyViewHolder extends   RecyclerView.ViewHolder{
+    public class TelaDeExercicioAdapterMyViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView overView;
         private ImageView image;
@@ -96,9 +91,9 @@ public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicio
 
         public TelaDeExercicioAdapterMyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.card_title);
-            overView=itemView.findViewById(R.id.card_text);
-            image=itemView.findViewById(R.id.card_image);
+            name = itemView.findViewById(R.id.card_title);
+            overView = itemView.findViewById(R.id.card_text);
+            image = itemView.findViewById(R.id.card_image);
 
         }
     }
