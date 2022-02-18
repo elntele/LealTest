@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /*import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;*/
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -34,7 +36,6 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
     private List<Treino> treinosCopy = new ArrayList<>();
     private Context context;
     private Activity activity;
-
 
     public TelaIncialAdapter(List<Treino> treinos, Context context, Activity activity) {
         this.treinos = treinos;
@@ -58,9 +59,26 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
         String mess = context.getString(R.string.continuarExerc);
         holder.overView.setText(mess);
         holder.name.setText(treinos.get(position).getDescricao().toString());
+        // isso tem que ir para a classe de api
+        FirebaseStorage storage = FireBaseStarangeApi.Companion.getStorangeRefe();
+        StorageReference storageRef = storage.getReference();
+        StorageReference folder = storageRef.child(treinos.get(position).getId()+"/");
+        StorageReference file = folder.child(treinos.get(position).
+                getExercicios().get(1).getId().toString()+".png");
 
-        Picasso.get().load(treinos.get(position).getExercicios().get(1).getImagem().toString()).
-                placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
+        file .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String s= uri.toString();
+                Picasso.get().load(s).
+                        placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
 
     }
 
@@ -94,7 +112,6 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
 
         public TelaInicialMyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             name = itemView.findViewById(R.id.card_title);
             overView = itemView.findViewById(R.id.card_text);
             image = itemView.findViewById(R.id.card_image);

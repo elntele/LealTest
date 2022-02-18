@@ -57,6 +57,7 @@ public class TelaInicialActivity extends AppCompatActivity {
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getApplicationContext(), TelaDeExercicioActivity.class);
                         intent.putParcelableArrayListExtra("exercicios", (ArrayList<Exercicio>) treinos.get(position).exercicios);
+                        intent.putExtra("idTreino", treinos.get(position).getId());
                         startActivity(intent);
 
                     }
@@ -65,6 +66,7 @@ public class TelaInicialActivity extends AppCompatActivity {
                     public void onLongItemClick(View view, int position) {
                         Intent intent = new Intent(getApplicationContext(), TelaDeExercicioActivity.class);
                         intent.putParcelableArrayListExtra("exercicios", (ArrayList<Exercicio>) treinos.get(position).exercicios);
+                        intent.putExtra("idTreino", treinos.get(position).getId());
                         startActivity(intent);
 
 

@@ -1,5 +1,6 @@
 package com.knowtest.lealtest.singletonInstances
 
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -9,26 +10,14 @@ import com.google.firebase.storage.StorageReference
 class FireBaseStarangeApi {
 
     companion object {
-        private var storageRef: StorageReference? = null
-        private var storageRefUrl: StorageReference? = null
+        private var storage: FirebaseStorage?=null;
 
         //padrão sigleton
-        fun getStorangeRefe(): StorageReference? {
-            if (storageRef == null) {
-                storageRef= FirebaseStorage.getInstance().getReference()
+        fun getStorangeRefe(): FirebaseStorage? {
+            if (storage == null) {
+                 storage = FirebaseStorage.getInstance();
             }
-            return storageRef
+            return storage
         }
-
-        fun getStorangeRefeFromUrl(string : String?): StorageReference? {
-            if (storageRefUrl == null) {
-                storageRefUrl=
-                    string?.let { FirebaseStorage.getInstance().getReferenceFromUrl(it) };
-            }
-            return storageRefUrl
-        }
-
-
-
     }
 }

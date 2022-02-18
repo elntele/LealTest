@@ -39,13 +39,15 @@ public class TelaDeExercicioActivity extends AppCompatActivity {
         //Remove title bar
         this.getSupportActionBar().hide();
         ArrayList<Exercicio> data;
+        String idTreino="";
         data = getIntent().getExtras().getParcelableArrayList("exercicios");
+        idTreino= (String) getIntent().getExtras().get("idTreino");
         exercicios = data;
         setContentView(R.layout.activity_tela_de_exercicio);
         searchView = findViewById(R.id.search_tela_exerc);
         recycleViewTelaExercicios = findViewById(R.id.recicler_lista_file_exerc);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        final TelaDeExercicioAdapter adapter = new TelaDeExercicioAdapter(exercicios, getApplicationContext());
+        final TelaDeExercicioAdapter adapter = new TelaDeExercicioAdapter(exercicios, this, idTreino);
         recycleViewTelaExercicios.setLayoutManager(layoutManager);
         recycleViewTelaExercicios.setAdapter(adapter);
         this.adapter = adapter;

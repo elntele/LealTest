@@ -1,13 +1,11 @@
-package com.knowtest.lealtest.viewModel;
+package com.knowtest.lealtest.api;
 
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +16,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.knowtest.lealtest.model.Treino;
 import com.knowtest.lealtest.singletonInstances.DB;
-import com.knowtest.lealtest.singletonInstances.FireStoreApi;
 import com.knowtest.lealtest.dao.DataBaseDao;
 import com.knowtest.lealtest.interfaceCallBack.LealCalBack;
 import com.knowtest.lealteste.Activity.model.Exercicio;
@@ -30,18 +27,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FireStoreViewModel {
+public class FireStoreApi {
     private List<Exercicio> exercicios = new ArrayList<>();
     private List<Treino> treinos = new ArrayList<>();
     private List<Treino> treinoout = new ArrayList<>();
+    private final String treino = "TREINO";
+    private final String exercicio = "EXERCICIO";
+
     private DataBaseDao db;
 
-    private static FireStoreViewModel f;
+    private static FireStoreApi f;
 
 
-    public static FireStoreViewModel fireStoreViewModel(Context context) {
+    public static FireStoreApi fireStoreViewModel(Context context) {
         if (f == null) {
-            return new FireStoreViewModel(context);
+            return new FireStoreApi(context);
         } else {
 
             return f;
@@ -49,7 +49,7 @@ public class FireStoreViewModel {
     }
 
 
-    private FireStoreViewModel(Context context) {
+    private FireStoreApi(Context context) {
         db = DB.Companion.getDB(context);
     }
 
@@ -84,7 +84,7 @@ public class FireStoreViewModel {
                     }).start();
                 }
                 for (Exercicio ex : exerciciosLocal) {
-                    FirebaseFirestore fireStoredb = FireStoreApi.Companion.getFirebaseFirestore();
+                    FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
                     DocumentReference d = fireStoredb.document("EXERCICIO/" + ex.getId());
                     preenchListaTreino(d, ex);
                 }
@@ -96,7 +96,7 @@ public class FireStoreViewModel {
 
 
     public void readData(LealCalBack lealCallback) {
-        FirebaseFirestore fireStoredb = FireStoreApi.Companion.getFirebaseFirestore();
+        FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
         fireStoredb.collection("EXERCICIO")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -124,7 +124,7 @@ public class FireStoreViewModel {
     private void preenchListaTreino(DocumentReference d, Exercicio exec) {
         List<Exercicio> exercicios = new ArrayList<>();
 
-        FirebaseFirestore fireStoredb = FireStoreApi.Companion.getFirebaseFirestore();
+        FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
         // DocumentReference d = fireStoredb.document("EXERCICIO/" + e.getId());
         fireStoredb.collection("TREINO").whereArrayContains("exercicios", d)
                 .get()
