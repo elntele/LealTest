@@ -7,14 +7,14 @@ class FireStoreApi {
 
     companion object {
 
-        private var db: FirebaseFirestore? = null
+        private var firebaseFirestore: FirebaseFirestore? = null
 
         //padrão sigleton
         fun getFirebaseFirestore(): FirebaseFirestore? {
-            if (db == null) {
-                db = FirebaseFirestore.getInstance()
+            if (firebaseFirestore == null) {
+                firebaseFirestore = FirebaseFirestore.getInstance()
             }
-            return db
+            return firebaseFirestore
         }
     }
 

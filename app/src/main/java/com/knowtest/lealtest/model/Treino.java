@@ -21,19 +21,20 @@ import com.knowtest.lealteste.Activity.model.Exercicio;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 public class Treino implements Parcelable, Serializable {
 
     @PrimaryKey
     @NonNull
-    String id="";
+    String id = "";
     @ColumnInfo(name = "nome_treino")
-    Long nome=null;
+    Long nome = null;
     @ColumnInfo(name = "dec_treino")
-    String descricao=null;
+    String descricao = null;
     @ColumnInfo(name = "data")
     @TypeConverters(DateConverter.class)
-    Timestamp data=null;
+    Timestamp data = null;
     @Expose
     @ColumnInfo(name = "lis_exer")
     @TypeConverters(ListExerciciosCoverter.class)
@@ -117,7 +118,6 @@ public class Treino implements Parcelable, Serializable {
     }
 
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -138,20 +138,31 @@ public class Treino implements Parcelable, Serializable {
     }
 
 
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null) {
             return false;
         }
+
+        try {
             o = (Treino) o;
-        if  ( this.getId().equals(((Treino) o).getId())){
-            return true;
-        }else{
+        }catch (ClassCastException e){
+            e.printStackTrace();
+        }
+        if (getClass() != o.getClass()) {
             return false;
         }
 
-
+        if (this.getId().equals(((Treino) o).getId())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

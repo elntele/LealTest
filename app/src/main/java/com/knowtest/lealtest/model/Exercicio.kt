@@ -6,6 +6,7 @@ import android.os.Parcelable
 import androidx.room.*
 import com.google.gson.annotations.Expose
 import com.knowtest.lealtest.helper.UrlConverter
+import com.knowtest.lealtest.model.Treino
 import java.net.MalformedURLException
 import java.net.URL
 
@@ -13,15 +14,18 @@ import java.net.URL
 class Exercicio (): Parcelable, java.io.Serializable {
     @PrimaryKey
     @Expose
-    var id: String=""
-    @ColumnInfo (name= "nome_exercicio")
+    var id: String = ""
+
+    @ColumnInfo(name = "nome_exercicio")
     @Expose
     var nome: Long? = null
-    @ColumnInfo (name= "end_imagem")
+
+    @ColumnInfo(name = "end_imagem")
     @TypeConverters(UrlConverter::class)
     @Expose
     var imagem: URL? = null
-    @ColumnInfo (name= "observac")
+
+    @ColumnInfo(name = "observac")
     @Expose
     var observacoes: String? = null
 
@@ -29,7 +33,7 @@ class Exercicio (): Parcelable, java.io.Serializable {
         id = parcel.readString().toString()
         nome = parcel.readValue(Long::class.java.classLoader) as? Long
         observacoes = parcel.readString()
-       var im =parcel.readString().toString()
+        var im = parcel.readString().toString()
         try {
             val url = URL(im)
             imagem = url
@@ -60,5 +64,19 @@ class Exercicio (): Parcelable, java.io.Serializable {
         }
     }
 
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
 
+    override fun equals(o: Any?): Boolean {
+        if (o == null) {
+            return true
+        }
+
+        if (javaClass != o.javaClass) {
+            return false
+        }
+        var r=(id == (o as Exercicio).id)
+        return r
+    }
 }

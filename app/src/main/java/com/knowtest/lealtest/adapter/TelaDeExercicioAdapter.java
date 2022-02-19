@@ -2,7 +2,6 @@ package com.knowtest.lealtest.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.knowtest.lealtest.R;
-import com.knowtest.lealtest.singletonInstances.FireBaseStarangeApi;
+import com.knowtest.lealtest.api.ApiFireStore;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 import com.squareup.picasso.Picasso;
 
@@ -66,26 +60,8 @@ public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicio
         String mess = context.getString(R.string.continuarExerc);
         holder.overView.setText(substring + "... " + context.getText(R.string.contnuarLendo));
         holder.name.setText(firstWord);
-        // isso tem que ir pra classe de api
-        FirebaseStorage storage = FireBaseStarangeApi.Companion.getStorangeRefe();
-        StorageReference storageRef = storage.getReference();
-        StorageReference folder = storageRef.child(idTreino+"/");
-        StorageReference file = folder.child(exercicios.get(position).getId().toString()+".png");
-
-        file .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String s= uri.toString();
-                Picasso.get().load(s).
-                        placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
-
+        Picasso.get().load(exercicios.get(position).getImagem().toString()).
+                placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
     }
 
     @Override

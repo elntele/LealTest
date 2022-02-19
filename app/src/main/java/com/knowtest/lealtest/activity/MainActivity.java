@@ -9,14 +9,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.knowtest.lealtest.R;
 import com.knowtest.lealtest.model.Treino;
 import com.knowtest.lealtest.singletonInstances.CredentialApi;
-import com.knowtest.lealtest.api.FireStoreApi;
+import com.knowtest.lealtest.api.ApiFireStore;
 import com.knowtest.lealteste.Activity.model.Exercicio;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private FireStoreApi f;
+    private ApiFireStore f;
     private List<Exercicio> exercicios = new ArrayList<>();
     private List<Treino> treinos = new ArrayList<>();
 
@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        f = f.fireStoreViewModel(getApplicationContext());
-        f.getExerciciosInBack();
+        f = f.getIntance(getApplicationContext());
+        f.getInstancesFromApiFireBase();
         consultabanco();
     }
 
@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void routing() {
+
         List<Treino> ts = f.getTreinoout();
+
         FirebaseAuth firebaseAuth = CredentialApi.Companion.getFirebaseAuth();
         if (((firebaseAuth.getCurrentUser() == null))) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
