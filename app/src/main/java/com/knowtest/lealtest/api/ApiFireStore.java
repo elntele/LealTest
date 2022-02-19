@@ -39,7 +39,7 @@ public class FireStoreApi {
     private static FireStoreApi f;
 
 
-    public static FireStoreApi fireStoreViewModel(Context context) {
+    public static FireStoreApi FireStoreApi(Context context) {
         if (f == null) {
             return new FireStoreApi(context);
         } else {
@@ -57,47 +57,52 @@ public class FireStoreApi {
         return db;
     }
 
-    public void getExerciciosInBack() {
-        readData(new LealCalBack() {
-            @Override
-            public void onCallback(List<Map<String, Object>> mapList) {
-                List<Exercicio> exerciciosLocal = new ArrayList<>();
-                for (Map<String, Object> m : mapList) {
-                    Exercicio e = new Exercicio();
-                    e.setId(m.get("id").toString());
-                    e.setObservacoes(m.get("observacoes").toString());
-                    e.setNome((Long) m.get("easyLong"));
-                    try {
-                        URL url = new URL(m.get("imagem").toString());
-                        e.setImagem(url);
-                    } catch (MalformedURLException malformedURLException) {
-                        malformedURLException.printStackTrace();
-                    }
-                    exerciciosLocal.add(e);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
 
-                            db.IexercicioDao().Insert(e);
-                            exercicios.add(e);
+    public void listFill() {
+        FirebaseFirestore fireStoredb = com.knowtest.lealtest.
+                singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
+        fireStoredb.collection(this.exercicio)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<Exercicio> exeList = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Exercicio e = new Exercicio();
+                                e.setId(document.getId());
+                                e.setNome(document.getLong("nome"));
+                                e.setObservacoes(document.get("observacoes").toString());
+                                try {
+                                    URL url = new URL(document.get("imagem").toString());
+                                    e.setImagem(url);
+                                } catch (MalformedURLException malformedURLException) {
+                                    malformedURLException.printStackTrace();
+                                }
+                                exeList.add(e);
+                                exercicios.add(e);
+                                insertExercicioInBank(e);
+                                FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
+                                DocumentReference d = fireStoredb.document(exercicio + "/" + e.getId());
+                                preenchListaTreino(d, e);
+
+                            }
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                    }).start();
-                }
-                for (Exercicio ex : exerciciosLocal) {
-                    FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
-                    DocumentReference d = fireStoredb.document("EXERCICIO/" + ex.getId());
-                    preenchListaTreino(d, ex);
-                }
+                    }
+
+                });
 
 
-            }
-        });
     }
 
 
     public void readData(LealCalBack lealCallback) {
-        FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
-        fireStoredb.collection("EXERCICIO")
+        FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances
+                .FireStoreApi.Companion.getFirebaseFirestore();
+        fireStoredb.collection(this.exercicio)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -126,7 +131,7 @@ public class FireStoreApi {
 
         FirebaseFirestore fireStoredb = com.knowtest.lealtest.singletonInstances.FireStoreApi.Companion.getFirebaseFirestore();
         // DocumentReference d = fireStoredb.document("EXERCICIO/" + e.getId());
-        fireStoredb.collection("TREINO").whereArrayContains("exercicios", d)
+        fireStoredb.collection(treino).whereArrayContains("exercicios", d)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -171,35 +176,46 @@ public class FireStoreApi {
         List<Treino> localList = new ArrayList<>();
         List<Treino> r = new ArrayList<>();
         localList.addAll(treinoout);
-         for (Treino trExt : treinoout) {
-             l1:
-             for (Treino trInter : localList) {
-                 if ((trExt.equals(trInter))) {
-                     if (!r.contains(trInter)){
-                         r.add(trInter);
-                         localList.remove(trInter);
-                         break l1;
-                     }
+        for (Treino trExt : treinoout) {
+            l1:
+            for (Treino trInter : localList) {
+                if ((trExt.equals(trInter))) {
+                    if (!r.contains(trInter)) {
+                        r.add(trInter);
+                        localList.remove(trInter);
+                        break l1;
+                    }
 
-                 }
-             }
+                }
+            }
 
-         }
-         List<Treino> retorno = new ArrayList<>();
-         for (Treino t:r){
-             for (Exercicio e: exercicios){
-                for (DocumentReference d: t.getStrinExe()){
-                    String ls= d.getPath();
-                    String [] l  = ls.split("/");
-                    String idDtr= l[1];
-                    if(e.getId().equals(idDtr)){
+        }
+        List<Treino> retorno = new ArrayList<>();
+        for (Treino t : r) {
+            for (Exercicio e : exercicios) {
+                for (DocumentReference d : t.getStrinExe()) {
+                    String ls = d.getPath();
+                    String[] l = ls.split("/");
+                    String idDtr = l[1];
+                    if (e.getId().equals(idDtr)) {
                         t.getExercicios().add(e);
                     }
                 }
-             }
-         }
+            }
+        }
 
         return r;
+    }
+
+    private void insertExercicioInBank(Exercicio e) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db.IexercicioDao().Insert(e);
+
+            }
+        }).start();
+
     }
 
 
