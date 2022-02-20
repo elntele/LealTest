@@ -40,8 +40,14 @@ public class TelaDeApresentacaoActivity extends AppCompatActivity {
             backButton = findViewById(R.id.voltar_tela_de_apresentacao);
             exiteButton = findViewById(R.id.sair_tela_de_apersentacao);
             poster = findViewById(R.id.foto_tela_de_apresentacao);
-            Picasso.get().load(exercicio.getImagem().toString()).
-                    placeholder(R.drawable.icone).error(R.drawable.icone).into(poster);
+
+            try {
+                Picasso.get().load(exercicio.getImagem().toString()).
+                        placeholder(R.drawable.icone).error(R.drawable.icone).into(poster);
+            }catch (NullPointerException e){
+                e.printStackTrace();
+
+            }
             title.setText(firstWord);
             overView.setText(exercicio.getObservacoes());
             botaoSair = findViewById(R.id.exit_button_tela_principal);

@@ -60,8 +60,14 @@ public class TelaDeExercicioAdapter extends RecyclerView.Adapter<TelaDeExercicio
         String mess = context.getString(R.string.continuarExerc);
         holder.overView.setText(substring + "... " + context.getText(R.string.contnuarLendo));
         holder.name.setText(firstWord);
-        Picasso.get().load(exercicios.get(position).getImagem().toString()).
-                placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
+
+        try {
+            Picasso.get().load(exercicios.get(position).getImagem().toString()).
+                    placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+
+        }
     }
 
     @Override

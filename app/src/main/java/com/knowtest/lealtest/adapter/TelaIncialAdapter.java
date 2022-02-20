@@ -66,7 +66,15 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
         StorageReference file = folder.child(treinos.get(position).
                 getExercicios().get(1).getId().toString()+".png");
 
-        file .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        try {
+            Picasso.get().load(treinos.get(position).getExercicios().get(1).getImagem().toString()).
+                    placeholder(R.drawable.icone).error(R.drawable.icone).into(holder.image);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+
+        }
+
+       /* file .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String s= uri.toString();
@@ -78,7 +86,7 @@ public class TelaIncialAdapter extends RecyclerView.Adapter<TelaIncialAdapter.Te
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
             }
-        });
+        });*/
 
     }
 

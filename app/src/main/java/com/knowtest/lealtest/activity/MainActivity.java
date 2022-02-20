@@ -2,6 +2,7 @@ package com.knowtest.lealtest.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,10 +20,11 @@ public class MainActivity extends AppCompatActivity {
     private ApiFireStore f;
     private List<Exercicio> exercicios = new ArrayList<>();
     private List<Treino> treinos = new ArrayList<>();
-
+    public static Activity a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.a=this;
         setContentView(R.layout.activity_main);
         f = f.getIntance(getApplicationContext());
         f.getInstancesFromApiFireBase();
