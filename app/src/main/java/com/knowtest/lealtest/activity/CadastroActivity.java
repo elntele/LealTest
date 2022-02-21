@@ -39,7 +39,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         name=findViewById(R.id.nome_cadastro);
         email=findViewById(R.id.email_cadastro);
-        password=findViewById(R.id.senha_cadastro);
+        password=findViewById(R.id.cadastro_senha);
         buttonCadastrar = findViewById(R.id.botao_cadastrar);
         cleanButton=findViewById(R.id.botao_limpar);
 

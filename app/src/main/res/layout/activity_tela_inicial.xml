@@ -80,16 +80,32 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
+
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="#CACACA">
+
+
+            <ImageView
+                android:id="@+id/add_treino"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:onClick="CadastrarTreino"
+                app:srcCompat="@mipmap/ic_add" />
+        </FrameLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#CACACACA">
+            android:background="#CACACA">
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="410dp"
-                android:layout_height="40dp"
+                android:id="@+id/imageButton_exerc"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#CACACA"
                 android:onClick="logOutTelaInicial"

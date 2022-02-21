@@ -97,6 +97,11 @@ public class TelaInicialActivity extends AppCompatActivity {
 
     }
 
+    public void CadastrarTreino(View view){
+        Intent intent = new Intent(getApplicationContext(), AddTreinoActivity.class);
+        startActivity(intent);
+    }
+
     public void sairTelaInicial(View v) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Deseja Sair do Aplicativo?");

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CadastroActivity">
+    tools:context=".activity.AddTreinoActivity">
 
 
     <LinearLayout
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/voltar_cadastro"
+            android:id="@+id/voltar_add_treino"
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
             app:srcCompat="@drawable/titulo" />
 
         <ImageView
-            android:id="@+id/sair_cadastro"
+            android:id="@+id/sair_add_treino"
             android:layout_width="40dp"
             android:layout_height="48dp"
             android:layout_weight="1"
@@ -47,7 +47,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/nome_cadastro"
+        android:id="@+id/nome_treino"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="55dp"
@@ -55,8 +55,8 @@
         android:layout_marginEnd="55dp"
         android:background="@drawable/backshape"
         android:ems="10"
-        android:hint="@string/gigNa"
-        android:inputType="textPersonName"
+        android:hint="@string/nomeTreino"
+        android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,8 +70,18 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
 
-    <EditText
-        android:id="@+id/email_cadastro"
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dataTrino"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/data_treino"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CalendarView
+        android:id="@+id/data_treino"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
@@ -80,16 +90,16 @@
         android:background="@drawable/backshape"
         android:ems="10"
         android:hint="@string/gigEmailCad"
-        android:inputType="textEmailAddress"
+        android:inputType="date"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nome_cadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/nome_treino" />
 
     <EditText
-        android:id="@+id/cadastro_senha"
+        android:id="@+id/desc_treino"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
@@ -97,13 +107,13 @@
         android:layout_marginEnd="55dp"
         android:background="@drawable/backshape"
         android:ems="10"
-        android:hint="@string/gigSenLog"
-        android:inputType="textPassword"
+        android:hint="@string/descrTreino"
+        android:inputType="textLongMessage"
         android:minHeight="48dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_cadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/data_treino" />
 
     <Button
         android:id="@+id/botao_cadastrar"
@@ -116,7 +126,7 @@
         android:text="@string/botCadastrar"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_senha" />
+        app:layout_constraintTop_toBottomOf="@+id/desc_treino" />
 
     <Button
         android:id="@+id/botao_limpar"
@@ -130,6 +140,6 @@
         android:text="@string/botLimpar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/cadastro_senha" />
+        app:layout_constraintTop_toBottomOf="@+id/desc_treino" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

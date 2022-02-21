@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LealTest">
         <activity
+            android:name=".activity.AddTreinoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.TelaDeExercicioActivity"
             android:exported="false" />
         <activity

@@ -15,4 +15,7 @@
     <string name="tituloTrei">Treinamentos</string>
     <string name="tituloExerc">Exercícios</string>
     <string name="espera">Aguarde um momento, o app está carregando a lista de treinos.</string>
+    <string name="nomeTreino">Digite um número para o treino.</string>
+    <string name="descrTreino">Digite uma drecrição para o seu treino</string>
+    <string name="dataTrino">Selecione uma data para o seu treino.</string>
 </resources>

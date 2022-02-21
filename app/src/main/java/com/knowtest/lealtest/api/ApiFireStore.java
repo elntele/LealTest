@@ -245,7 +245,7 @@ public class ApiFireStore {
         // Create a new user with a first and last name
         Map<String, Object> treino = new HashMap<>();
         List<String> l = new ArrayList<>();
-        l.add(this.exercicio+"/"+id);
+        l.add(this.exercicio + "/" + id);
     /*    l.add(this.treino + "/" + "teste");
         l.add(this.treino + "/" + "teste");
         l.add(this.treino + "/" + "teste");*/
